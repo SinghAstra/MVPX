@@ -15,8 +15,12 @@ int main(){
     }
     int l = 0;
     int r = n-1;
+    int mid = l+(r-l)/2;
     while(l<=r){
-        int mid = l+(r-l)/2;
+        mid = l+(r-l)/2;
+        cout<<"l = "<<l<<endl;
+        cout<<"r = "<<r<<endl;
+        cout<<"mid = "<<mid<<endl;
         if((mid==0||arr[mid]>=arr[mid-1])&&(mid==n-1||arr[mid]>=arr[mid+1])){
             cout<<"peak ->"<< mid <<endl;
             break;
@@ -27,5 +31,6 @@ int main(){
             l = mid+1;
         }
     }
+    cout<<"mid ->"<<mid<<endl;
     return 0;
 }
