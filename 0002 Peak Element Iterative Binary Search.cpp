@@ -25,7 +25,7 @@ int main(){
             cout<<"peak ->"<< mid <<endl;
             break;
         }
-        if(mid!=0&&arr[mid]<=arr[mid-1]){
+        if(mid!=0&&arr[mid]<arr[mid-1]){
             r = mid-1;
         }else{
             l = mid+1;
