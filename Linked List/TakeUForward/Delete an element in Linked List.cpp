@@ -24,18 +24,63 @@ Node* deleteHead(Node* head){
     return head;
 }
 
-void deleteTail(Node* head,int len){
-    if(head == nullptr){
-        return;
+Node* deleteTail(Node* head){
+    if(head == nullptr||head->next == nullptr){
+        return nullptr;
     }
     Node* temp = head;
-    for(int i=1;i<len-1;i++){
-        temp = temp->next;
+    while(head->next->next != nullptr){
+        head = head->next;
     }
-    Node* tail = temp->next;
+    Node* tail = head->next;
     delete tail;
-    temp->next = nullptr;
+    head->next = nullptr;
+    return temp;
 }
+
+Node* deleteAtPosition(Node* head,int index,int length){
+    if(index<0||index>=length){
+        return head;
+    }
+    if(index==0){
+        head = deleteHead(head);
+        return head;
+    }else if(index==length-1){
+        head = deleteTail(head);
+        return head;
+    }else{
+        Node* temp = head;
+        for(int i=1;i<index;i++){
+            head = head->next;
+        }
+        Node* deleNode = head->next;
+        head->next = head->next->next;
+        delete deleNode;
+        return temp;
+    }
+}
+
+Node* deleteByValue(Node* head,int value,int length){
+    if(head==nullptr){
+        return head;
+    }
+    int index = -1;
+    int i = 0;
+    Node* temp = head;
+    while(head!=nullptr){
+        if(head->data==value){
+            index = i;
+            break;
+        }
+        head = head->next;
+        i++;
+    }
+    if(index==-1){
+        return head;
+    }else{
+        return deleteAtPosition(temp,index,length);
+    }
+    }
 
 int length(Node* head){
     int len = 0;
@@ -65,11 +110,5 @@ int main(){
         currentNode->next = temp;
         currentNode = temp;
     }
-    printLinkedList(head);
-    head = deleteHead(head);
-    printLinkedList(head);
-    int len = length(head);
-    deleteTail(head,len);
-    printLinkedList(head);
     return 0;
 }
