@@ -72,7 +72,7 @@ Node* insertElementBeforeValue(Node* head,int x,int val,int length){
     int i = 0;
     int index = -1;
     Node* temp = head;
-    while(head->next!=NULL){
+    while(head!=NULL){
         if(head->data == x){
             index = i;
             break;
@@ -80,6 +80,7 @@ Node* insertElementBeforeValue(Node* head,int x,int val,int length){
         head = head->next;
         i++;
     }
+    cout << "index : "<<index<<endl;
     if(index == -1){
         return head;
     }else{
@@ -109,22 +110,21 @@ void printLinkedList(Node* head){
 
 int main(){
     // Inserting data into LinkedList
-    int arr[] = {1,2,3,4,5,6,7,8,9};
-    Node* head = new Node(arr[0]);
-    Node* currentNode = head;
-    for(int i=1; i<sizeof(arr) / sizeof(int);i++){
-        Node* temp = new Node(arr[i]);
-        currentNode->next = temp;
-        currentNode = temp;
-    }
-    // Node* head = new Node(24);
-    // head = deleteElementAtHead(head);
+    // int arr[] = {1,2,3,4,5,6,7,8,9};
+    // Node* head = new Node(arr[0]);
+    // Node* currentNode = head;
+    // for(int i=1; i<sizeof(arr) / sizeof(int);i++){
+    //     Node* temp = new Node(arr[i]);
+    //     currentNode->next = temp;
+    //     currentNode = temp;
+    // }
+    Node* head = new Node(24);
     printLinkedList(head);
     int length = lengthOfLinkedList(head);
-    head = insertElementBeforeValue(head,1,100,length);
+    head = insertElementBeforeValue(head,24,100,length);
     printLinkedList(head);
     length = lengthOfLinkedList(head);
-    head = insertElementBeforeValue(head,9,800,length);
+    head = insertElementBeforeValue(head,24,800,length);
     printLinkedList(head);
     
     return 0;
