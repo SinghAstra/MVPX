@@ -36,7 +36,6 @@ Node* deleteHead(Node* head){
     return head;
 }
 
-
 Node* deleteTail(Node* head){
     if(head==nullptr||head->next==nullptr){
         return nullptr;
@@ -52,7 +51,6 @@ Node* deleteTail(Node* head){
     return temp;
 }
 
-
 Node* deleteAtPosition(Node* head,int k){
     Node* tempHead = head;
     int length = 0;
@@ -63,10 +61,10 @@ Node* deleteAtPosition(Node* head,int k){
     if(k<1||k>length){
         return tempHead;
     }else if(k==1){
-        return deleteHead(head);
+        return deleteHead(tempHead);
     }else if(k==length){
         cout<<"In k==length "<<k<<endl;
-        return deleteTail(head);
+        return deleteTail(tempHead);
     }else{
         int i=1;
         Node* temp = tempHead;
@@ -89,9 +87,6 @@ Node* deleteNode(Node* head,Node* node){
     while(head!=nullptr){
         pos++;
         if(head==node){
-            cout << "In head==node "<<endl;
-            cout <<"tempHead->data : "<<tempHead->data<<endl;
-            cout <<"pos : "<<pos<<endl;
             tempHead = deleteAtPosition(tempHead,pos);
             break;
         }
@@ -121,25 +116,86 @@ Node* nodeAtPosition(Node* head,int position){
     }
     return nullptr;
 }
-int main(){
-    int arr[] = {1,2,3,4,5,6,7,8,9};
-    Node* currentNode = new Node(arr[0]);
-    Node* head = currentNode;
-    for(int i=1; i<sizeof(arr)/sizeof(int);i++){
-        Node* newNode = new Node(arr[i]);
-        currentNode->next = newNode;
-        newNode->prev = currentNode;
+
+Node* insertBeforeHead(Node* head, int data){
+    Node* newHead = new Node(data);
+    if(head == nullptr){
+        return newHead;
+    }
+    newHead->next = head;
+    head->prev = newHead;
+    return newHead;
+}
+
+
+Node* insertBeforeTail(Node* head, int data){
+    Node* newNode = new Node(data);
+    if(head == nullptr){
+        return newNode;
+    }
+    if(head->next==nullptr){
+        newNode->next = head;
+        head->prev = newNode;
+        return newNode;
+    }
+    Node* currentNode = head;
+    while(currentNode->next!=nullptr){
         currentNode = currentNode->next;
-    }   
-    // Node* head = new Node(24);
+    }
+    Node* prevNode = currentNode->prev;
+    prevNode->next = newNode;
+    newNode->prev = prevNode;
+    newNode->next = currentNode;
+    currentNode->prev = newNode;
+    return head;
+}
+
+
+Node* insertBeforeKthNode(Node* head, int value,int k){
+    int length = 0;
+    Node* tempHead = head;
+    while(head!=nullptr){
+        length++;
+        head = head->next;
+    }
+    if(k<1||k>length){
+        return tempHead;
+    }
+    int position = 1;
+    Node* currentNode = tempHead;
+    while(position!=k){
+        currentNode = currentNode->next;
+        position++;
+    }
+    Node* newNode = new Node(value);
+    if(currentNode->prev==nullptr) {
+        newNode->next = currentNode;
+        currentNode->prev = newNode;
+        tempHead = newNode;
+    }else{
+        Node* prevNode = currentNode->prev;
+        prevNode->next = newNode;
+        newNode->prev = prevNode;
+        newNode->next = currentNode;
+        currentNode->prev = newNode;
+    }
+    return tempHead;
+}
+int main(){
+    // int arr[] = {1,2,3,4,5,6,7,8,9};
+    // Node* currentNode = new Node(arr[0]);
+    // Node* head = currentNode;
+    // for(int i=1; i<sizeof(arr)/sizeof(int);i++){
+    //     Node* newNode = new Node(arr[i]);
+    //     currentNode->next = newNode;
+    //     newNode->prev = currentNode;
+    //     currentNode = currentNode->next;
+    // }   
+    Node* head = new Node(24);
     printLinkedList(head);
-    Node* node = nodeAtPosition(head,6);
-    cout << "node->data : "<<node->data <<endl;
-    head = deleteNode(head,node);
+    head = deleteHead(head);
     printLinkedList(head);
-    // node = nodeAtPosition(head,1);
-    // cout << "node->data : "<<node->data <<endl;
-    // head = deleteNode(head,node);
-    // printLinkedList(head);
+    head = insertBeforeKthNode(head,999,1);
+    printLinkedList(head);
     return 0;
 }
