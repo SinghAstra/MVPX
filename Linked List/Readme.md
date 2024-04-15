@@ -35,3 +35,22 @@ int* y = &x; // y contains memory location of x
 
 - The total memory used by a linked list depends on the number of nodes in the list and the size of each node.
 - The size of each node in a linked list depends on the number of data points each node has and the system architecture (32-bit or 64-bit).
+
+## Double Linked List
+
+- Double linked list has two pointer on every node that keeps track of previous node and next node.
+  Representation of Double linked list :
+
+```cpp
+class Node{
+    public:
+    int data;
+    Node* next;
+    Node* prev;
+    Node(int val){
+        data = val;
+        next = nullptr;
+        prev = nullptr;
+    }
+}
+```
