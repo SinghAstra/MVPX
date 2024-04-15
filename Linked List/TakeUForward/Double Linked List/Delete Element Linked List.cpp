@@ -127,7 +127,6 @@ Node* insertBeforeHead(Node* head, int data){
     return newHead;
 }
 
-
 Node* insertBeforeTail(Node* head, int data){
     Node* newNode = new Node(data);
     if(head == nullptr){
@@ -181,21 +180,55 @@ Node* insertBeforeKthNode(Node* head, int value,int k){
     }
     return tempHead;
 }
+
+Node* insertNodeBeforeNode(Node* head, Node* node,int data){
+    if(head==nullptr) return nullptr;
+
+    Node* currentNode = head;
+    Node* foundNode = nullptr;
+
+    while(currentNode!=nullptr){
+        if(currentNode == node ){
+            foundNode = currentNode;
+            break;
+        }
+        currentNode = currentNode->next;
+    }
+    if(foundNode==nullptr){
+        return head;
+    }
+    Node* newNode = new Node(data);
+    if(foundNode->prev==nullptr){
+        newNode->next = foundNode;
+        foundNode->prev = newNode;
+        head = newNode;
+        return head;
+    }
+    Node* prevNode = foundNode->prev;
+    prevNode->next = newNode;
+    newNode->prev = prevNode;
+    newNode->next = foundNode;
+    foundNode->prev = newNode;
+    return head;
+}
+
+
 int main(){
-    // int arr[] = {1,2,3,4,5,6,7,8,9};
-    // Node* currentNode = new Node(arr[0]);
-    // Node* head = currentNode;
-    // for(int i=1; i<sizeof(arr)/sizeof(int);i++){
-    //     Node* newNode = new Node(arr[i]);
-    //     currentNode->next = newNode;
-    //     newNode->prev = currentNode;
-    //     currentNode = currentNode->next;
-    // }   
-    Node* head = new Node(24);
+    int arr[] = {1,2,3,4,5,6,7,8,9};
+    Node* currentNode = new Node(arr[0]);
+    Node* head = currentNode;
+    for(int i=1; i<sizeof(arr)/sizeof(int);i++){
+        Node* newNode = new Node(arr[i]);
+        currentNode->next = newNode;
+        newNode->prev = currentNode;
+        currentNode = currentNode->next;
+    }   
+    // Node* head = new Node(24);
+    // printLinkedList(head);
+    // head = deleteHead(head);
     printLinkedList(head);
-    head = deleteHead(head);
-    printLinkedList(head);
-    head = insertBeforeKthNode(head,999,1);
+    Node* node = nodeAtPosition(head,1);
+    head = insertNodeBeforeNode(head,node,242424);
     printLinkedList(head);
     return 0;
 }
