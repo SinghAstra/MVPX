@@ -2,6 +2,7 @@
 #include "vector" 
 #include <algorithm>    
 #include <set> 
+#include <stack> 
 using namespace std;
 
 class Node{
@@ -213,6 +214,7 @@ Node* insertNodeBeforeNode(Node* head, Node* node,int data){
 }
 
 
+
 int main(){
     int arr[] = {1,2,3,4,5,6,7,8,9};
     Node* currentNode = new Node(arr[0]);
@@ -226,9 +228,6 @@ int main(){
     // Node* head = new Node(24);
     // printLinkedList(head);
     // head = deleteHead(head);
-    printLinkedList(head);
-    Node* node = nodeAtPosition(head,1);
-    head = insertNodeBeforeNode(head,node,242424);
     printLinkedList(head);
     return 0;
 }
