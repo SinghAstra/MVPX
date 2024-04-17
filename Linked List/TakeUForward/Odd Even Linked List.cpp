@@ -25,7 +25,9 @@ void printLinkedList(ListNode* head){
     cout << endl;
 }
 
-ListNode* oddEvenList(ListNode* head) {
+// Time Complexity : O(2n)
+// Space Complexity : O(n)
+ListNode* oddEvenListBrute(ListNode* head) {
     if(head == nullptr){
         return head;
     }
@@ -58,7 +60,25 @@ ListNode* oddEvenList(ListNode* head) {
     return head;
 }
 
+// Time Complexity : O(n)
+// Space Complexity : O(1)
+ListNode* oddEvenListOptimal(ListNode* head) {
+   if(head == nullptr){
+    return head;
+   }
+   ListNode* oddNode = head;
+   ListNode* evenNode = head->next;
+   ListNode* tempEvenNode = evenNode;
 
+   while(evenNode != nullptr&&evenNode->next != nullptr){
+    oddNode->next = oddNode->next->next;
+    evenNode->next = evenNode->next->next;
+    oddNode = oddNode->next;
+    evenNode = evenNode->next;
+   }
+    oddNode->next = tempEvenNode;
+   return head;
+}
 int main(){
     int arr[] = {1,2,3,4,5,6,7,8,9};
     ListNode* head = new ListNode(arr[0]);
@@ -69,7 +89,7 @@ int main(){
         currentNode = temp;
     }
     printLinkedList(head);
-    head = oddEvenList(head);
+    head = oddEvenListOptimal(head);
     printLinkedList(head);
     return 0;
 }
