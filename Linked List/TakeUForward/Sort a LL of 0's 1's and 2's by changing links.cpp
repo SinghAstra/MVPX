@@ -25,7 +25,9 @@ void printLinkedList(ListNode* head){
     cout << endl;
 }
 
-ListNode* sortedList(Node* head){
+// Time Complexity : O(2n)
+// Space Complexity : O(1)
+ListNode* sortedList(ListNode* head){
     int count0 = 0;
     int count1 = 0;
     int count2 = 0;
@@ -45,21 +47,45 @@ ListNode* sortedList(Node* head){
         if(count0>0){
             temp->val = 0;
             count0--;
-        temp = temp->next;
-        continue;
         }else if(count1>0){
             temp->val = 1;
             count1 -= 1;
-        temp = temp->next;
         }else if(count2>0){
             temp->val = 2;
             count2--;
-        temp = temp->next;
         }
+        temp = temp->next;
     }
     return head;
 }
 
+
+ListNode* sortedListOptimal(ListNode* head){
+    ListNode* temp = head;
+    ListNode* zeroHead = new ListNode(-1);
+    ListNode* oneHead = new ListNode(-1);
+    ListNode* twoHead = new ListNode(-1);
+    ListNode* zero = zeroHead;
+    ListNode* one = oneHead;
+    ListNode* two = twoHead;
+    while(temp!= nullptr){
+        if(temp->val == 0){
+            zero->next = temp;
+            zero = temp;
+        }else if(temp->val == 1){
+            one->next = temp;
+            one = temp;
+        }else if(temp->val == 2){
+            two->next = temp;
+            two = temp;
+        }
+        temp = temp->next;
+    }
+    zero->next = oneHead->next;
+    one->next = twoHead->next;
+    two->next = nullptr;
+    return zeroHead->next;
+}
 int main(){
     int arr[] = {2,1,2,0,0,1,1,2};
     ListNode* head = new ListNode(arr[0]);
@@ -70,6 +96,7 @@ int main(){
         currentNode = temp;
     }
     printLinkedList(head);
-    head = sortedList(head);
-
+    head = sortedListOptimal(head);
+    printLinkedList(head); 
+    return 0;
 }
