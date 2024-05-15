@@ -49,7 +49,7 @@ void backtrackingOptimal(int index, vector<int> sub, vector<vector<int>>& ans, v
     if(index >= len){
         sort(sub.begin(),sub.end());
         auto it = find(ans.begin(),ans.end(),sub);
-        if(it != ans.end()){
+        if(it == ans.end()){
         ans.push_back(sub);
         }
         return ;
