@@ -14,7 +14,7 @@ int largestBruteForce(vector<int> &arr, int n){
     return arr[n-1];        
 }
 
-// Approach 2 : Using Max Variable
+// Approach 2 : Using Max Variable : Linear Search
 // Time Complexity : O(n)
 // Space Complexity : O(1)
 int largestMax(vector<int> &arr, int n){
