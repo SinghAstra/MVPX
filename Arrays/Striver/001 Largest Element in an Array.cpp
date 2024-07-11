@@ -29,5 +29,5 @@ int main(){
     vector<int> arr = {1, 2, 0, 3, 2, 4, 5};
     int n = arr.size();
     cout << "largest Element : "<<largestElementBruteForce(arr,n) << endl;
-    cout << "largest : "<<largestElementLinearSearch(arr,n) << endl;
+    cout << "largest Element : "<<largestElementLinearSearch(arr,n) << endl;
 }
