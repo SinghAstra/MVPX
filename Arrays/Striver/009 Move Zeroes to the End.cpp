@@ -29,7 +29,7 @@ void moveZeroesToTheEndBruteForceApproach(vector<int>& nums){
 
 // Approach 2 : Using Two Pointers
 // left pointer keeps the track of where the non zero element should be placed
-// right pointer scans throughout the array
+// right pointer scans the vector moving from left to right
 // For non zero elements swap happens both the left and right pointers are incremented
 // For zero elements only the right pointer is incremented and no swap happens
 // Time Complexity : O(n)
