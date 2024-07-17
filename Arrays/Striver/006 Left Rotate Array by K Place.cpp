@@ -60,7 +60,7 @@ void reverse(vector<int>& nums ,int startIndex, int count){
 }
 
 // Approach 3 : Three Reverse Approach
-// Time Complexity : O(2*n)
+// Time Complexity : O(n)
 // Space Complexity : O(1)
 void leftRotateArrayByKPlaceOptimalApproach(vector<int>& nums, int k){
     int n = nums.size();
