@@ -1,7 +1,4 @@
-#include "iostream"
-#include "vector" 
-#include <algorithm>    
-#include <set> 
+#include <bits/stdc++.h>
 using namespace std;
 
 // Approach 1 : Brute Force Approach
