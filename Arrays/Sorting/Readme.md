@@ -46,3 +46,25 @@
 
 - **Time Complexity:** O(n log n)
 - **Space Complexity:** O(n) (due to the auxiliary space needed for the temporary arrays during the merge process)
+
+## Quick Sort
+
+- **Quick Sort** is a divide-and-conquer sorting algorithm.
+- It works by selecting a 'pivot' element from the array and partitioning the other elements into two sub-arrays, according to whether they are less than or greater than the pivot. The sub-arrays are then sorted recursively.
+
+- **Steps:**
+
+  1. Choose a pivot element from the array.
+  2. Partition the array into two sub-arrays:
+     - Elements less than the pivot.
+     - Elements greater than or equal to the pivot.
+  3. Recursively apply the same process to the sub-arrays.
+  4. Combine the sub-arrays and the pivot to form the sorted array.
+
+- **Time Complexity:**
+
+  - **Best Case:** O(n log n) (occurs when the pivot divides the array into two nearly equal halves)
+  - **Average Case:** O(n log n)
+  - **Worst Case:** O(n^2) (occurs when the pivot selection is poor, e.g., always the smallest or largest element)
+
+- **Space Complexity:** O(log n) (due to the recursion stack; the in-place partitioning does not require additional space)
