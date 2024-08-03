@@ -23,9 +23,26 @@ int majorityElementBruteForce(vector<int> nums){
 }
 
 // Approach 2 : Using Hash Map
-// Time Complexity : O(nlogn) 
+// Time Complexity : O(2*n)
+// Space Complexity : O(1)
+int majorityElementHashMapBetterApproach(vector<int> nums){
+    unordered_map<int, int> countMap;
+    int n = nums.size();
+    for(int i = 0; i < n; i++){
+        countMap[nums[i]]++;
+    }
+    for(auto it = countMap.begin();it != countMap.end();it++){
+        if(it->second > n/2){
+            return it->first;
+        }
+    }
+    return -1;
+}
+
+// Approach 3 : Using Hash Map
+// Time Complexity : O(n) 
 // Space Complexity : O(n)
-int majorityElementHashMap(vector<int> nums){
+int majorityElementHashMapBetterApproachThanBetterApproach(vector<int> nums){
     unordered_map<int, int> countMap;
     int n = nums.size();
     for(int i = 0; i < n; i++){
@@ -38,29 +55,36 @@ int majorityElementHashMap(vector<int> nums){
 }
 
 
-// Approach 3 : Moore's Voting Algorithm
+// Approach 4 : Moore's Voting Algorithm
+// Moore's Voting Algorithm is used to find the majority element in list or array.
+// The Algorithm has two phases: 
+// 1. Candidate selection phase
+// 2. Verification phase
 // Time Complexity : O(2*n)
 // Space Complexity : O(1)
 int majorityElementMooreVotingAlgorithm(vector<int> nums){
     int count = 0;
-    int majorityElement;
+    int candidateElem;
     int n = nums.size();
+    // Phase 1 : Candidate selection phase
     for(int i = 0; i < n;i++){
         if(count==0){
-            majorityElement = nums[i];
+            candidateElem = nums[i];
+            count = 1;
         }
-        if(nums[i] == majorityElement){
+        if(nums[i] == candidateElem){
             count++;
         }else{
             count--;
         }
     }
-    int totalCount = 0;
+    // Phase 2 : Verification phase
+    int candidateCount = 0;
     for(int i = 0; i < n;i++){
-        if(nums[i] == majorityElement){
-            totalCount++;
-            if(totalCount > n/2){
-                return majorityElement;
+        if(nums[i] == candidateElem){
+            candidateCount++;
+            if(candidateCount > n/2){
+                return candidateElem;
             }
         }
     }
