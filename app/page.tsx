@@ -1,9 +1,9 @@
 "use client";
 
 import { Button, buttonVariants } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { siteConfig } from "@/config/site";
-import { ArrowRight } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { ArrowRight, Calendar, Clock } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
@@ -15,6 +15,14 @@ const recentPosts = [
     excerpt:
       "Exploring the latest trends and best practices in web development...",
     slug: "building-modern-web-applications",
+    readTime: "5 min read",
+    coverImage:
+      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80",
+    author: {
+      name: "Singhastra",
+      avatar:
+        "https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&q=80",
+    },
   },
   {
     title: "The Future of Frontend Development",
@@ -22,12 +30,28 @@ const recentPosts = [
     excerpt:
       "Discussing emerging technologies and frameworks that are shaping...",
     slug: "future-of-frontend-development",
+    readTime: "4 min read",
+    coverImage:
+      "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80",
+    author: {
+      name: "Singhastra",
+      avatar:
+        "https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&q=80",
+    },
   },
   {
     title: "Mastering TypeScript",
     date: "April 5, 2024",
     excerpt: "A comprehensive guide to using TypeScript in your projects...",
     slug: "mastering-typescript",
+    readTime: "6 min read",
+    coverImage:
+      "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80",
+    author: {
+      name: "Singhastra",
+      avatar:
+        "https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&q=80",
+    },
   },
 ];
 
@@ -55,15 +79,27 @@ const IntroSection = () => (
       </div>
       <p className="text-lg text-muted-foreground">Full Stack Web Developer</p>
       <div className="flex gap-4">
-        <Link href="/blogs" className={buttonVariants({ variant: "default" })}>
+        <Link
+          href="/blogs"
+          className={cn(
+            buttonVariants({ variant: "default" }),
+            "hover:outline-[4px] hover:outline-double transition-all ease-in"
+          )}
+        >
           Read Blog <ArrowRight className="ml-2 h-4 w-4" />
         </Link>
-        <Link href="/about" className={buttonVariants({ variant: "outline" })}>
+        <Link
+          href="/about"
+          className={cn(
+            buttonVariants({ variant: "outline" }),
+            "hover:outline-[4px] hover:outline-double hover:bg-transparent transition-all ease-in"
+          )}
+        >
           About Me
         </Link>
       </div>
     </div>
-    <div className="relative h-[400px]  flex-1 rounded-lg overflow-hidden  border-double border-4 ">
+    <div className="relative h-[400px] flex-1 rounded-lg overflow-hidden border-double border-4">
       <Image
         src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80"
         alt="Coding Environment"
@@ -75,36 +111,71 @@ const IntroSection = () => (
   </div>
 );
 
+const RecentPostsSection = () => (
+  <div className="space-y-6">
+    <div className="flex items-center justify-between py-6 border-b border-dotted ">
+      <h2 className="text-3xl font-medium tracking-wide">Recent Posts</h2>
+      <Link
+        href={"/blogs"}
+        className={cn(buttonVariants({ variant: "outline" }))}
+      >
+        View All
+      </Link>
+    </div>
+    {recentPosts.map((post) => (
+      <div
+        key={post.slug}
+        className="p-6  hover:outline-[6px] hover:outline-double  border rounded-md transition-all ease-in"
+      >
+        <Link key={post.slug} href={`/blogs/${post.slug}`}>
+          <div className="flex gap-6">
+            <div className="relative h-32 w-48 ">
+              <Image
+                src={post.coverImage}
+                alt={post.title}
+                fill
+                className="object-cover rounded-md"
+              />
+            </div>
+            <div className="flex-1">
+              <div className="flex items-center justify-between gap-4 mb-2">
+                <h3 className="text-xl font-normal">{post.title}</h3>
+                <span className="flex items-center text-xs gap-1 text-muted-foreground tracking-wider">
+                  <Calendar className="h-4 w-4" />
+                  {post.date}
+                </span>
+              </div>
+              <p className="text-muted-foreground text-sm">{post.excerpt}</p>
+
+              <div className="flex items-center gap-2 mt-4">
+                <div className="relative h-8 w-8 rounded-full overflow-hidden">
+                  <Image
+                    src={post.author.avatar}
+                    alt={post.author.name}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <span className="text-sm font-normal text-muted-foreground">
+                  {post.author.name}
+                </span>
+              </div>
+            </div>
+          </div>
+        </Link>
+      </div>
+    ))}
+  </div>
+);
+
 export default function Home() {
   return (
     <div className="min-h-screen">
-      <div className="container mx-auto px-4 py-16 max-w-4xl">
+      <div className="container mx-auto px-4 py-16 max-w-4xl flex flex-col gap-24">
         <IntroSection />
 
         {/* Recent Posts Section */}
-        <section className="mb-20">
-          <h2 className="text-3xl font-bold mb-8">Recent Posts</h2>
-          <div className="grid gap-6">
-            {recentPosts.map((post) => (
-              <div key={post.slug}>
-                <Card className="p-6 hover:shadow-lg transition-shadow">
-                  <h3 className="text-xl font-semibold mb-2">
-                    <Link
-                      href={`/blog/${post.slug}`}
-                      className="hover:text-primary"
-                    >
-                      {post.title}
-                    </Link>
-                  </h3>
-                  <p className="text-sm text-muted-foreground mb-3">
-                    {post.date}
-                  </p>
-                  <p className="text-muted-foreground">{post.excerpt}</p>
-                </Card>
-              </div>
-            ))}
-          </div>
-        </section>
+        <RecentPostsSection />
 
         {/* Footer */}
         <footer className="border-t pt-8 text-center">
