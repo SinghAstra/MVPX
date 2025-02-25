@@ -1,9 +1,10 @@
 "use client";
 
 import { Button, buttonVariants } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
-import { ArrowRight, Calendar } from "lucide-react";
+import { ArrowRight, Calendar, Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
@@ -168,41 +169,43 @@ const RecentPostsSection = () => (
   </div>
 );
 
+const FooterSection = () => (
+  <footer className="border-t border-dotted pt-8">
+    <div className="flex flex-col items-center text-center mb-8">
+      <h2 className="text-2xl font-normal  mb-4">Let&apos;s Connect</h2>
+      <p className="text-muted-foreground max-w-md mb-6">
+        Join me on this journey of exploration and learning in the world of
+        technology.
+      </p>
+      <div className="flex gap-4 mb-8">
+        <Button variant="outline" size="lg" asChild className="rounded-full">
+          <Link href={siteConfig.links.twitter} target="_blank">
+            <FaTwitter className="h-5 w-5 mr-2" />
+            Follow on Twitter
+          </Link>
+        </Button>
+        <Button variant="outline" size="lg" asChild className="rounded-full">
+          <Link href={siteConfig.links.github} target="_blank">
+            <FaGithub className="h-5 w-5 mr-2" />
+            Star on GitHub
+          </Link>
+        </Button>
+      </div>
+    </div>
+    <div className="border-t border-dotted pt-4 text-center text-sm text-muted-foreground">
+      © {new Date().getFullYear()} John Doe. All rights reserved.
+    </div>
+  </footer>
+);
+
 export default function Home() {
   return (
     <div className="min-h-screen">
       <div className="container mx-auto px-4 py-16 max-w-4xl flex flex-col gap-24">
         <IntroSection />
-
-        {/* Recent Posts Section */}
         <RecentPostsSection />
 
-        {/* Footer */}
-        <footer className="border-t pt-8 text-center">
-          <div className="flex justify-center gap-6 mb-6">
-            <Button variant="ghost" size="icon" asChild>
-              <Link href="https://twitter.com" target="_blank">
-                <FaTwitter className="h-5 w-5" />
-                <span className="sr-only">Twitter</span>
-              </Link>
-            </Button>
-            <Button variant="ghost" size="icon" asChild>
-              <Link href="https://github.com" target="_blank">
-                <FaGithub className="h-5 w-5" />
-                <span className="sr-only">GitHub</span>
-              </Link>
-            </Button>
-            <Button variant="ghost" size="icon" asChild>
-              <Link href="https://linkedin.com" target="_blank">
-                <FaLinkedin className="h-5 w-5" />
-                <span className="sr-only">LinkedIn</span>
-              </Link>
-            </Button>
-          </div>
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} John Doe. All rights reserved.
-          </p>
-        </footer>
+        <FooterSection />
       </div>
     </div>
   );
