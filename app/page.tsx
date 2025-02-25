@@ -3,7 +3,7 @@
 import { Button, buttonVariants } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
-import { ArrowRight, Calendar, Clock } from "lucide-react";
+import { ArrowRight, Calendar } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
