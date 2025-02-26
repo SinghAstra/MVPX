@@ -1,151 +1,100 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Home, Menu, X } from "lucide-react";
+import { Calendar, Home, Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const blogPosts = [
   {
-    title: "Building Modern Web Applications",
-    date: "April 15, 2024",
-    excerpt:
-      "Exploring the latest trends and best practices in web development...",
-    slug: "building-modern-web-applications",
-    readTime: "5 min",
+    slug: "getting-started",
+    title: "Getting Started with Web Development",
+    excerpt: "Learn the basics of web development and start your journey.",
+    date: "2024-01-01",
+    readTime: "5 min read",
     coverImage:
-      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80",
-    author: {
-      name: "Singhastra",
-      avatar:
-        "https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&q=80",
-    },
-    tags: ["Web Development", "JavaScript", "React"],
-  },
-  {
-    title: "The Future of Frontend Development",
-    date: "April 10, 2024",
-    excerpt:
-      "Discussing emerging technologies and frameworks that are shaping...",
-    slug: "future-of-frontend-development",
-    readTime: "4 min",
-    coverImage:
-      "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80",
-    author: {
-      name: "Singhastra",
-      avatar:
-        "https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&q=80",
-    },
-    tags: ["Frontend", "JavaScript"],
-  },
-  {
-    title: "Mastering React Hooks",
-    date: "March 28, 2024",
-    excerpt: "A deep dive into React Hooks and how to use them effectively...",
-    slug: "mastering-react-hooks",
-    readTime: "6 min",
-    coverImage:
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1517433456452-f9633a875f6f?w=1200",
     author: {
       name: "John Doe",
       avatar:
-        "https://images.unsplash.com/photo-1607748864228-8c3f08c80790?auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400",
     },
-    tags: ["React", "JavaScript"],
+    tags: ["Web Development", "Beginners", "HTML", "CSS", "JavaScript"],
   },
   {
-    title: "Understanding Asynchronous JavaScript",
-    date: "March 15, 2024",
-    excerpt: "Learn how async/await and promises work under the hood...",
-    slug: "understanding-async-javascript",
-    readTime: "7 min",
+    slug: "javascript-tips",
+    title: "10 JavaScript Tips You Should Know",
+    excerpt: "Boost your JS skills with these essential tips and tricks.",
+    date: "2024-02-10",
+    readTime: "8 min read",
     coverImage:
-      "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1200",
     author: {
       name: "Jane Smith",
       avatar:
-        "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=400",
     },
-    tags: ["JavaScript", "Async", "Promises"],
+    tags: ["JavaScript", "Tips", "ES6", "Async/Await", "DOM Manipulation"],
   },
   {
-    title: "Introduction to TypeScript",
-    date: "February 20, 2024",
-    excerpt: "Why TypeScript is the future of JavaScript development...",
-    slug: "introduction-to-typescript",
-    readTime: "8 min",
+    slug: "react-hooks",
+    title: "Mastering React Hooks",
+    excerpt: "Understand and use React Hooks like a pro.",
+    date: "2024-03-05",
+    readTime: "7 min read",
     coverImage:
-      "https://images.unsplash.com/photo-1517433456452-f9633a875f6f?auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1579403124614-197f69d8187b?w=1200",
     author: {
-      name: "Alex Johnson",
+      name: "Alice Johnson",
       avatar:
-        "https://images.unsplash.com/photo-1502767089025-6572583495b8?auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400",
     },
-    tags: ["TypeScript", "JavaScript"],
+    tags: ["React", "Hooks", "useState", "useEffect", "Custom Hooks"],
   },
   {
-    title: "Building a Fullstack App with Node.js",
-    date: "January 10, 2024",
-    excerpt:
-      "How to create a fullstack app using Node.js, Express, and MongoDB...",
-    slug: "building-fullstack-nodejs-app",
-    readTime: "10 min",
+    slug: "css-tricks",
+    title: "CSS Tricks for Modern Web Design",
+    excerpt: "Improve your web design skills with these CSS techniques.",
+    date: "2024-04-15",
+    readTime: "6 min read",
     coverImage:
-      "https://images.unsplash.com/photo-1484417894907-623942c8ee29?auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1512295767273-ac109ac3acfa?w=1200",
     author: {
-      name: "Chris Lee",
+      name: "Robert Brown",
       avatar:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400",
     },
-    tags: ["Node.js", "Fullstack", "MongoDB"],
+    tags: ["CSS", "Design", "Flexbox", "Grid", "Animations"],
   },
   {
-    title: "Deploying Web Apps with Vercel",
-    date: "December 5, 2023",
-    excerpt:
-      "A beginner's guide to deploying web apps seamlessly using Vercel...",
-    slug: "deploying-web-apps-vercel",
-    readTime: "3 min",
+    slug: "fullstack-roadmap",
+    title: "Your Roadmap to Full-Stack Development",
+    excerpt: "Plan your journey from frontend to backend mastery.",
+    date: "2024-05-12",
+    readTime: "10 min read",
     coverImage:
-      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200",
     author: {
-      name: "Singhastra",
-      avatar:
-        "https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&q=80",
+      name: "Michael Lee",
+      avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400",
     },
-    tags: ["Deployment", "Vercel", "Hosting"],
+    tags: ["Full-Stack", "Backend", "Frontend", "APIs", "Databases"],
   },
   {
-    title: "CSS Grid vs Flexbox: When to Use Each",
-    date: "November 22, 2023",
-    excerpt: "A comparison of CSS Grid and Flexbox for modern layout design...",
-    slug: "css-grid-vs-flexbox",
-    readTime: "5 min",
+    slug: "typescript-guide",
+    title: "Understanding TypeScript for JavaScript Developers",
+    excerpt: "Enhance your JS projects with TypeScript’s strong typing.",
+    date: "2024-06-01",
+    readTime: "7 min read",
     coverImage:
-      "https://images.unsplash.com/photo-1512295767273-ac109ac3acfa?auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1532619187604-01988e2028f0?w=1200",
     author: {
-      name: "Emily Roberts",
+      name: "Emily Davis",
       avatar:
-        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400",
     },
-    tags: ["CSS", "Grid", "Flexbox"],
-  },
-  {
-    title: "Learning Next.js for Server-Side Rendering",
-    date: "October 30, 2023",
-    excerpt:
-      "Exploring the benefits of using Next.js for SSR and static site generation...",
-    slug: "learning-nextjs-ssr",
-    readTime: "6 min",
-    coverImage:
-      "https://images.unsplash.com/photo-1516387938699-a93567ec168e?auto=format&fit=crop&q=80",
-    author: {
-      name: "Michael Green",
-      avatar:
-        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80",
-    },
-    tags: ["Next.js", "SSR", "React"],
+    tags: ["TypeScript", "JavaScript", "Static Typing", "Interfaces", "OOP"],
   },
 ];
 
@@ -162,7 +111,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="border rounded-md border-border/40 sticky top-5 container mx-auto bg-background/80 backdrop-blur-lg z-50">
+    <nav className="border rounded-md border-border/40 sticky top-5 mb-10 container mx-auto bg-background/80 backdrop-blur-lg z-50">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
@@ -213,90 +162,89 @@ const TagFilter = ({
   onSelectTag: (tag: string | null) => void;
 }) => {
   return (
-    <div className="flex-1 flex gap-2 transition-all flex-wrap">
-      <Button
-        variant={selectedTag === null ? "default" : "outline"}
-        onClick={() => onSelectTag(null)}
-        className="rounded-full w-fit inline-block"
-      >
-        All
-      </Button>
-      {tags.map((tag) => (
+    <div className="lg:fixed lg:top-[100px] lg:bottom-[10px] lg:max-w-[230px] bg-accent/10 w-full  p-4 rounded-lg border border-border/40 lg:mb-0 mb-6 lg:overflow-y-auto lg:max-h-[calc(100vh-110px)]">
+      <div className="flex flex-row flex-wrap gap-2">
         <Button
-          key={tag}
-          variant={selectedTag === tag ? "default" : "outline"}
-          onClick={() => onSelectTag(tag)}
-          className="rounded-full w-fit"
+          variant={selectedTag === null ? "default" : "outline"}
+          onClick={() => onSelectTag(null)}
+          className="rounded-full w-fit hover:outline-[2px] hover:outline-double hover:bg-accent/10 hover:text-white"
         >
-          {tag}
+          All
         </Button>
-      ))}
+        {tags.map((tag) => (
+          <Button
+            key={tag}
+            variant={selectedTag === tag ? "default" : "outline"}
+            onClick={() => onSelectTag(tag)}
+            className="rounded-full w-fit hover:outline-[2px] hover:outline-double hover:bg-accent/10 hover:text-white"
+          >
+            {tag}
+          </Button>
+        ))}
+      </div>
     </div>
   );
 };
 
 export default function BlogPage() {
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
-  const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const filteredPosts = selectedTag
     ? blogPosts.filter((post) => post.tags.includes(selectedTag))
     : blogPosts;
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      setIsScrolled(scrollPosition > 3);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen pb-12">
       <Navbar />
-      <main
-        className={
-          isScrolled ? "flex " : "container mx-auto px-4 py-16 max-w-4xl"
-        }
-      >
-        <TagFilter selectedTag={selectedTag} onSelectTag={setSelectedTag} />
-        <div className="space-y-8 flex-2">
-          {filteredPosts.map((post) => (
-            <div
-              key={post.slug}
-              className="p-6 border rounded-md transition-all"
-            >
-              <Link href={`/blog/${post.slug}`}>
-                <div className="flex gap-6">
-                  <div className="relative h-32 w-48">
-                    <Image
-                      src={post.coverImage}
-                      alt={post.title}
-                      fill
-                      className="object-cover rounded-md"
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-normal">{post.title}</h3>
-                    <p className="text-muted-foreground text-sm">
-                      {post.excerpt}
-                    </p>
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {post.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-xs bg-muted rounded-full px-2 py-1"
-                        >
-                          {tag}
+      <main className="container mx-auto px-4">
+        <div className="container ">
+          <TagFilter selectedTag={selectedTag} onSelectTag={setSelectedTag} />
+          <div className="space-y-6 lg:ml-[250px] lg:max-w-4xl mx-auto ">
+            {filteredPosts.map((post) => (
+              <div
+                key={post.slug}
+                className="p-6 hover:outline-[2px] hover:outline-double hover:bg-accent/10  border rounded-md transition-all ease-in"
+              >
+                <Link key={post.slug} href={`/blog/${post.slug}`}>
+                  <div className="flex gap-6">
+                    <div className="relative h-32 w-48 ">
+                      <Image
+                        src={post.coverImage}
+                        alt={post.title}
+                        fill
+                        className="object-cover rounded-md"
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between gap-4 mb-2">
+                        <h3 className="text-xl font-normal">{post.title}</h3>
+                        <span className="flex items-center text-xs gap-1 text-muted-foreground tracking-wider">
+                          <Calendar className="h-4 w-4" />
+                          {post.date}
                         </span>
-                      ))}
+                      </div>
+                      <p className="text-muted-foreground text-sm">
+                        {post.excerpt}
+                      </p>
+
+                      <div className="flex items-center gap-2 mt-4">
+                        <div className="relative h-8 w-8 rounded-full overflow-hidden">
+                          <Image
+                            src={post.author.avatar}
+                            alt={post.author.name}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                        <span className="text-sm font-normal text-muted-foreground">
+                          {post.author.name}
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Link>
-            </div>
-          ))}
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
       </main>
     </div>

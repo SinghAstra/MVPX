@@ -125,7 +125,7 @@ const RecentPostsSection = () => (
     {recentPosts.map((post) => (
       <div
         key={post.slug}
-        className="p-6  hover:outline-[6px] hover:outline-double  border rounded-md transition-all ease-in"
+        className="p-6 hover:outline-[2px] hover:outline-double hover:bg-accent/10  border rounded-md transition-all ease-in"
       >
         <Link key={post.slug} href={`/blog/${post.slug}`}>
           <div className="flex gap-6">
