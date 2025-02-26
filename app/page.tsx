@@ -80,7 +80,7 @@ const IntroSection = () => (
       <p className="text-lg text-muted-foreground">Full Stack Web Developer</p>
       <div className="flex gap-4">
         <Link
-          href="/blogs"
+          href="/blog"
           className={cn(
             buttonVariants({ variant: "default" }),
             "hover:outline-[4px] hover:outline-double transition-all ease-in"
@@ -116,7 +116,7 @@ const RecentPostsSection = () => (
     <div className="flex items-center justify-between py-6 border-b border-dotted ">
       <h2 className="text-3xl font-medium tracking-wide">Recent Posts</h2>
       <Link
-        href={"/blogs"}
+        href={"/blog"}
         className={cn(buttonVariants({ variant: "outline" }))}
       >
         View All
@@ -127,7 +127,7 @@ const RecentPostsSection = () => (
         key={post.slug}
         className="p-6  hover:outline-[6px] hover:outline-double  border rounded-md transition-all ease-in"
       >
-        <Link key={post.slug} href={`/blogs/${post.slug}`}>
+        <Link key={post.slug} href={`/blog/${post.slug}`}>
           <div className="flex gap-6">
             <div className="relative h-32 w-48 ">
               <Image
